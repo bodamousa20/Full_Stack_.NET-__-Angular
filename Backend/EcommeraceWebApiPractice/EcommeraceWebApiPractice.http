@@ -1,0 +1,6 @@
+@EcommeraceWebApiPractice_HostAddress = http://localhost:5115
+
+GET {{EcommeraceWebApiPractice_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
