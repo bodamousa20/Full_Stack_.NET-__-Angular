@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<nav class="sn-nav">
+
+  <a class="sn-logo" routerLink="/">Shop<span>Now</span></a>
+
+
+
+  <div class="sn-nav-icons">
+   
+
+    @if(loggedIn()) {
+    <ul class="sn-nav-links">
+    <li><a routerLink="/user/home">Home</a></li>
+    <li><a routerLink="/user/all-products">Products</a></li>
+
+     </ul>
+       <a routerLink="/user/favourite" aria-label="Wishlist">
+      <i class="fas fa-heart"></i>
+    <span class="cart-badge">{{productServices.favCount()}}</span>
+
+    </a>
+      <a routerLink="/user/cart" aria-label="Cart" style="position:relative">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge">{{cartService.cartCounter()}}</span>
+      </a>
+
+      <a href="/user/profile" class="nav-user">
+        <i class="fas fa-user"></i>
+        Welcome {{ getUserName() }}
+      </a>
+
+      <a href="#" class="nav-logout" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+        Log out
+      </a>
+
+    } @else {
+
+      <a routerLink="/login" class="btn-outline-sm">Login</a>
+      <a routerLink="/register" class="btn-primary-sm">Register</a>
+
+    }
+  </div>
+
+</nav>

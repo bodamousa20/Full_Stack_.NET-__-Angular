@@ -1,0 +1,114 @@
+<main>
+  <section class="container cart-section">
+
+<div class="section-header">
+  <h2 class="section-title">My Cart</h2>
+  @if (cart() != null ) {
+    <button class="btn-clear-cart" (click)="clearCart()">
+      <i class="fas fa-trash"></i> Clear Cart
+    </button>
+  }
+</div>
+
+    @if (cart() == null ) {
+      <!-- Skeleton -->
+      <div class="cart-layout">
+        <div class="cart-items">
+          @for (item of skeletonItems; track item) {
+            <div class="cart-card skeleton-card">
+              <div class="skel skel-cart-img"></div>
+              <div class="cart-card-info">
+                <div class="skel skel-product-title"></div>
+                <div class="skel skel-product-category"></div>
+                <div class="skel skel-product-price"></div>
+              </div>
+            </div>
+          }
+        </div>
+        <div class="cart-summary skeleton-card">
+          <div class="skel skel-summary-title"></div>
+          <div class="skel skel-summary-row"></div>
+          <div class="skel skel-summary-row"></div>
+          <div class="skel skel-product-btn"></div>
+        </div>
+      </div>
+    }
+
+    @else if ( cart()!.data.cartItemDtos.length == 0) {
+      <!-- Empty State -->
+      <div class="empty-cart">
+        <i class="fas fa-shopping-cart"></i>
+        <p>Your cart is empty</p>
+        <a routerLink="/user/all-products" class="btn-primary">Browse Products</a>
+      </div>
+    }
+
+    @else {
+      <div class="cart-layout">
+        
+        <!-- Cart Items -->
+        <div class="cart-items">
+          @for (item of cart()!.data.cartItemDtos; track item.id) {
+            <div class="cart-card">
+              <img [src]="item.product.thunmailImage" alt="{{ item.product.name }}" class="cart-card-img" />
+              <div class="cart-card-info">
+                <h4 class="product-title">{{ item.product.name }}</h4>
+                <p class="cart-card-desc">{{ item.product.description }}</p>
+                <div class="cart-card-bottom">
+                  <span class="current-price">${{ item.price }}</span>
+                  <div class="qty-control">
+                    <button class="qty-btn" (click)="decrease(item.id)">−</button>
+                    <span class="qty-value">{{ item.quanity }}</span>
+                    <button class="qty-btn" (click)="increase(item.id)">+</button>
+                  </div>
+                  <button class="btn-remove" (click)="removeItem(item.id)">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+
+    <!-- Order Summary -->
+<div class="cart-summary">
+  <h3 class="summary-title">Order Summary</h3>
+  <div class="summary-row">
+    <span>Subtotal</span>
+    <span>${{ cart()!.data.total }}</span>
+  </div>
+  <div class="summary-row">
+    <span>Shipping</span>
+    <span class="free-shipping">Free</span>
+  </div>
+  <hr class="divider">
+  <div class="summary-row summary-total">
+    <span>Total</span>
+    <span>${{ cart()!.data.total }}</span>
+  </div>
+
+  <!-- Checkout Fields -->
+  <div class="checkout-fields">
+    <input
+      type="text"
+      [(ngModel)]="address"
+      placeholder="Enter your address"
+      class="checkout-input"
+    />
+    <input
+      type="text"
+      [(ngModel)]="postalCode"
+      placeholder="Enter postal code"
+      class="checkout-input"
+    />
+  </div>
+
+  <button class="btn btn-block" (click)="Checkout()">Proceed to Checkout</button>
+  <a routerLink="/user/all-products" class="btn-outline btn-block-outline">Continue Shopping</a>
+</div>
+
+      </div>
+    }
+
+  </section>
+</main>

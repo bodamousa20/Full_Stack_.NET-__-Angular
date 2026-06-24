@@ -1,0 +1,33 @@
+<form [formGroup]="form">
+    <div class="login-card">
+        <h2>Login</h2>
+        <p>Welcome Back </p>
+        <div class="input-group">
+            <label>Email</label>
+         <input name="Email" placeholder="Enter Email" type="email" [formControl]="form.controls.email"  >
+    @if(CheckEmail){
+        <span class="error">The Email input is invalid</span>
+    } 
+        </div>
+        <div class="input-group">
+            <label>password</label>
+            <input  name="password" placeholder="Enter password" type="password" [formControl]="form.controls.password" >
+        @if(CheckPassword){
+        <span class="error">The password input is invalid</span>
+    }
+    @if(message() != ''){
+    <span class="success">{{message()}}</span>
+    }
+        </div>
+        <button class="btn" (click)="loginSubmit()"> 
+            @if(isLoading()){
+                <span>Loading</span>
+            }
+            @else {
+            <span>Submit</span>
+            }
+        </button>
+    </div>
+
+   
+</form>

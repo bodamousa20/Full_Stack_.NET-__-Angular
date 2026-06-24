@@ -1,0 +1,108 @@
+@if(profileData()){
+
+
+<main>
+  <section class="container profile-section">
+
+    <div class="profile-hero">
+      <div class="profile-avatar">
+        <span>{{ profileData()?.username!.charAt(0).toUpperCase() }}</span>
+      </div>
+      <div class="profile-hero-info">
+        <h2 class="profile-name">{{ profileData()?.username }}</h2>
+        <span class="profile-badge">Member</span>
+      </div>
+    </div>
+
+    <div class="profile-grid">
+
+      <!-- Personal Info -->
+      <div class="profile-card">
+        <div class="profile-card-header">
+          <i class="fas fa-user"></i>
+          <h3>Personal Information</h3>
+        </div>
+        <div class="profile-fields">
+          <div class="profile-field">
+            <span class="field-label">Username</span>
+            <span class="field-value">{{ profileData()?.username  }}</span>
+          </div>
+          <div class="profile-field">
+            <span class="field-label">Age</span>
+            <span class="field-value">{{ profileData()?.age  }} years</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="profile-card">
+        <div class="profile-card-header">
+          <i class="fas fa-address-book"></i>
+          <h3>Contact Information</h3>
+        </div>
+        <div class="profile-fields">
+          <div class="profile-field">
+            <span class="field-label"><i class="fas fa-envelope"></i> Email</span>
+            <span class="field-value">{{ profileData()?.email  }}</span>
+          </div>
+          <div class="profile-field">
+            <span class="field-label"><i class="fas fa-phone"></i> Phone</span>
+            <span class="field-value">{{ profileData()?.phone  }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Account Info -->
+      <div class="profile-card">
+        <div class="profile-card-header">
+          <i class="fas fa-shield-alt"></i>
+          <h3>Account Information</h3>
+        </div>
+        <div class="profile-fields">
+          <div class="profile-field">
+            <span class="field-label">Account ID</span>
+            <span class="field-value field-id">{{ profileData()?.id  }}</span>
+          </div>
+          <div class="profile-field">
+            <span class="field-label">Status</span>
+            <span class="field-value status-active"><i class="fas fa-circle"></i> Active</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="profile-card profile-actions-card">
+        <div class="profile-card-header">
+          <i class="fas fa-cog"></i>
+          <h3>Account Actions</h3>
+        </div>
+        <div class="/profile-actions">
+          <a routerLink="/user/checkout" class="action-btn">
+            <i class="fas fa-box"></i>
+            <span>My Orders</span>
+            <i class="fas fa-chevron-right action-arrow"></i>
+          </a>
+          <a routerLink="/user/favourite" class="action-btn">
+            <i class="fas fa-heart"></i>
+            <span>Favourites</span>
+            <i class="fas fa-chevron-right action-arrow"></i>
+          </a>
+          <a routerLink="/user/cart" class="action-btn">
+            <i class="fas fa-shopping-cart"></i>
+            <span>My Cart</span>
+            <i class="fas fa-chevron-right action-arrow"></i>
+          </a>
+          <button class="action-btn action-btn-danger" (click)="sigout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Sign Out</span>
+            <i class="fas fa-chevron-right action-arrow"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+}@else {
+    <p>Something Went Wrong Try again</p>
+}

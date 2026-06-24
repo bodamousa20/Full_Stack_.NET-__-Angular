@@ -1,0 +1,104 @@
+<main>
+  <section class="sn-section">
+
+    <div class="section-header">
+      <h2 class="section-title">Order History</h2>
+      <span class="orders-count-badge">{{ orders()?.length }} order{{ orders.length !== 1 ? 's' : '' }}</span>
+    </div>
+
+    @if (orders() == null) {
+      @for (item of skeletonItems; track item) {
+        <div class="order-card">
+          <div class="order-meta-row">
+            <div class="meta-group">
+              <div class="skel skel-meta-label"></div>
+              <div class="skel skel-meta-value"></div>
+            </div>
+            <div class="meta-group">
+              <div class="skel skel-meta-label"></div>
+              <div class="skel skel-meta-value"></div>
+            </div>
+            <div class="meta-group">
+              <div class="skel skel-meta-label"></div>
+              <div class="skel skel-meta-value"></div>
+            </div>
+            <div class="meta-group">
+              <div class="skel skel-meta-label"></div>
+              <div class="skel skel-meta-value-lg"></div>
+            </div>
+          </div>
+          <div class="order-items-list">
+            <div class="order-item-row">
+              <div class="skel skel-order-img"></div>
+              <div class="order-item-info">
+                <div class="skel skel-item-name"></div>
+                <div class="skel skel-item-meta"></div>
+              </div>
+              <div class="skel skel-item-price"></div>
+            </div>
+          </div>
+          <div class="order-footer">
+            <div class="skel skel-badge"></div>
+            <div style="display:flex;gap:8px;">
+              <div class="skel skel-btn"></div>
+              <div class="skel skel-btn"></div>
+            </div>
+          </div>
+        </div>
+      }
+    }
+
+    @else if (orders()?.length === 0) {
+      <div class="empty-state">
+        <i class="fas fa-box-open"></i>
+        <h3>No orders yet</h3>
+        <p>When you place an order, it will appear here.</p>
+        <a routerLink="/user/all-products" class="btn-primary">
+          <i class="fas fa-shopping-bag"></i> Browse Products
+        </a>
+      </div>
+    }
+
+    @else {
+      @for (order of orders(); track order.orderId) {
+        <div class="order-card">
+
+          <div class="order-meta-row">
+            <div class="meta-group">
+              <span class="meta-label">Order ID</span>
+              <span class="meta-value order-id-badge"># {{ order.orderId.slice(0, 8).toUpperCase() }}</span>
+            </div>
+            <div class="meta-group">
+              <span class="meta-label">Date Placed</span>
+              <span class="meta-value">{{ order.date }}</span>
+            </div>
+            <div class="meta-group">
+              <span class="meta-label">Ship To</span>
+              <span class="meta-value">{{ order.address }} ({{ order.postalCode }})</span>
+            </div>
+           
+          </div>
+
+          <div class="order-items-list">
+            @for (item of order.orderItems; track item.id) {
+              <div class="order-item-row">
+                <div class="order-item-img-wrap">
+                  <img [src]="item.thumbnailImage" [alt]="item.productName" class="order-item-img" loading="lazy" />
+                </div>
+                <div class="order-item-info">
+                  <h4 class="order-item-name">{{ item.productName }}</h4>
+                  <p class="order-item-meta">Qty: {{ item.quantity }} &middot; Product ID: {{ item.productId }}</p>
+                </div>
+                <span class="order-item-price">{{ item.price }}</span>
+              </div>
+            }
+          </div>
+
+   
+
+        </div>
+      }
+    }
+
+  </section>
+</main>

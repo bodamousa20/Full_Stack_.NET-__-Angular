@@ -1,0 +1,100 @@
+<div class="catalog-layout">
+  
+  <aside class="catalog-sidebar">
+    <div class="sidebar-header">
+      <h2>Filters</h2>
+      <button class="btn-clear" type="button" (click)="clear()">Clear All</button>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-group">
+        <label for="filterName">Product Name</label>
+        <input type="text" id="filterName" [(ngModel)]="name" placeholder="Search by name..." />
+      </div>
+
+     
+@if(categories != null){
+    <div class="filter-group">
+        <label for="filterCategory">Category</label>
+
+        <select id="filterCategory" [(ngModel)]="selectedCategoryId">
+          <option [value]="'All'">All Categories</option>
+          @for (cat of categories(); track cat.id) {
+          <option [value]=cat.id>{{cat.name}}</option>
+          }
+          
+        </select>
+      </div>
+}
+  
+
+      <div class="filter-group">
+        <label>Price Range</label>
+        <div class="price-inputs">
+          <input type="number" id="minPrice" placeholder="Min $" min="0" [(ngModel)]="minprice"  />
+          <span class="price-separator">-</span>
+          <input type="number" id="maxPrice" placeholder="Max $" min="0" [(ngModel)]="maxprice" />
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label for="filterSort">Sort by Price</label>
+        <select id="filterSort" [(ngModel)]="sort">
+          <option value="">Default</option>
+          <option value="true">Ascending (Low to High)</option>
+          <option value="false">Descending (High to Low)</option>
+        </select>
+      </div>
+
+      <button class="btn-apply-filters" type="button" (click)="ApplyFilter()">Apply Filters</button>
+    </div>
+  </aside>
+
+  <main class="catalog-main">
+    
+    <div class="catalog-top-bar">
+      <span class="results-count">Showing  <strong>{{pageno*pageSize}}</strong> of <strong>{{totalProducts}}</strong> products</span>
+    </div>
+
+    <div class="product-grid">
+      @if(products()){
+        @for (product of products(); track product.id) {
+           <div class="product-card">
+        <div class="card-image-wrap">
+          <img [src]="activePhotoSet(product.thunmailImage)" alt="Product Name" />
+          <span class="card-badge">{{getCatName(product.categoryId)}}</span>
+        </div>
+        <div class="card-details">
+          <h3 class="card-title">{{product.name}}</h3>
+          <p class="card-desc">{{product.description}}</p>
+          <div class="card-bottom">
+            <span class="card-price">{{product.price}}</span>
+<button [routerLink]="['/user/product-details', product.id]" class="btn-view">View Details</button></div>
+        </div>
+      </div>
+        }
+   
+      }@else {
+        <p>No Product Found</p>
+     }
+   
+
+     
+      </div>
+
+    <div class="pagination-wrapper">
+      <button class="btn-page nav-page" (click)="prevPage()">&#8249; Prev</button>
+      
+      <div class="page-numbers">
+        <button class="btn-page active">1</button>
+        <button class="btn-page">2</button>
+        <button class="btn-page">3</button>
+        <span class="page-dots">...</span>
+        <button class="btn-page">13</button>
+      </div>
+
+      <button class="btn-page nav-page " (click)="nextPage()">Next &#8250;</button>
+    </div>
+
+  </main>
+</div>

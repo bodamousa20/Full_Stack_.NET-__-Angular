@@ -1,0 +1,142 @@
+
+
+<main>
+  <section class="sn-hero">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Summer sale 2026</div>
+      <h1>Summer Sale is Here</h1>
+      <p>Up to 50% off on selected items. Don't miss out on the best deals of the season.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-primary">Shop now</a>
+        <a href="#" class="btn-outline">Browse categories</a>
+      </div>
+      <div class="hero-badges">
+        <span class="hero-badge"><i class="fas fa-truck"></i> Free shipping over $50</span>
+        <span class="hero-badge"><i class="fas fa-undo"></i> 30-day returns</span>
+        <span class="hero-badge"><i class="fas fa-shield-alt"></i> Secure checkout</span>
+      </div>
+    </div>
+  </section>
+  <section class="categories container sn-section">
+  <div class="section-header">
+    <h2 class="section-title">Shop by category</h2>
+    <a routerLink="/user/categories" class="section-link">View all</a>
+  </div>
+  <div class="cat-grid">
+
+    @if (categories() != null) {
+      @for (cat of categories()!; track cat.id) {
+        <div class="category-card">
+          <div class="cat-icon"><i class="fas fa-tag"></i></div>
+          <div class="cat-name">{{ cat.name }}</div>
+          <div class="cat-count">{{ cat.description }}</div>
+        </div>
+      }
+    } @else {
+      @for (item of skeletonItems; track item) {
+        <div class="category-card skeleton-card">
+          <div class="skel skel-icon"></div>
+          <div class="skel skel-name"></div>
+          <div class="skel skel-count"></div>
+        </div>
+      }
+    }
+
+  </div>
+</section>
+  
+  
+
+  <hr class="divider">
+
+  <section class="featured-products container sn-section">
+    <div class="section-header">
+      <h2 class="section-title">Trending Products</h2>
+      <a routerLink="/user/all-products" class="section-link">View all</a>
+    </div>
+    <div class="product-grid">
+      @if(products()){   
+      @for (product of products(); track product.id) {
+        <div class="product-card" (click)="getProductById(product.id)">
+          <div class="product-img">
+            <div class="product-badge">Sale</div>
+            <img [src]="product.thunmailImage" alt="img">
+          </div>
+          <div class="product-info">
+            <span class="product-category">Electronics</span>
+            <h4 class="product-title">{{ product.name }}</h4>
+            <div class="product-rating">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+              <span>(128)</span>
+            </div>
+            <div class="product-price">
+              <span class="current-price">${{ product.price }}</span>
+            </div>
+            <button class="btn btn-block" (click)="AddProductTocart(product.id)">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      }
+ } @else {
+  @for (item of skeletonItems; track item) {
+    <div class="product-card skeleton-card">
+      <div class="skel skel-product-img"></div>
+      <div class="product-info">
+        <div class="skel skel-product-category"></div>
+        <div class="skel skel-product-title"></div>
+        <div class="skel skel-product-title-short"></div>
+        <div class="skel skel-product-rating"></div>
+        <div class="skel skel-product-price"></div>
+        <div class="skel skel-product-btn"></div>
+      </div>
+    </div>
+  }
+} 
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>ShopNow</h4>
+      <p>Your one-stop shop for everything you need. Quality products at the best prices.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Customer Service</h4>
+      <ul>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Shipping Policy</a></li>
+        <li><a href="#">Returns & Exchanges</a></li>
+        <li><a href="#">FAQs</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#">My Account</a></li>
+        <li><a href="#">Order Tracking</a></li>
+        <li><a href="#">Wishlist</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Newsletter</h4>
+      <p>Subscribe to get updates on new arrivals and special offers.</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Your Email Address">
+        <button class="btn-primary">Subscribe</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 ShopNow E-commerce. All Rights Reserved.</p>
+  </div>
+</footer>

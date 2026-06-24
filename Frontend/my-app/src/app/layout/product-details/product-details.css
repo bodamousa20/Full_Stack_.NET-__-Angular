@@ -1,0 +1,285 @@
+/* ── Layout ── */
+.pd-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 1.5rem 0;
+  align-items: start;
+}
+
+/* ── Gallery ── */
+.pd-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pd-main-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  border: 0.5px solid #e0e0e0;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.pd-main-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: opacity 0.2s ease;
+}
+
+/* ── Thumbnail carousel ── */
+.pd-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pd-thumbs-track {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  flex: 1;
+  padding: 4px 2px;
+}
+
+.pd-thumbs-track::-webkit-scrollbar {
+  display: none;
+}
+
+.pd-thumb {
+  flex: 0 0 64px;
+  height: 64px;
+  border-radius: 8px;
+  border: 0.5px solid #e0e0e0;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.pd-thumb:hover {
+  border-color: #999;
+  transform: scale(1.03);
+}
+
+.pd-thumb.active {
+  border: 2px solid #111;
+}
+
+.pd-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Carousel arrow buttons ── */
+.carousel-btn {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 0.5px solid #d0d0d0;
+  background: #fff;
+  color: #111;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.carousel-btn:hover:not(:disabled) {
+  background: #f0f0f0;
+  border-color: #aaa;
+}
+
+.carousel-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* ── Dot indicators ── */
+.dot-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ccc;
+  cursor: pointer;
+  transition: background 0.2s, width 0.2s, border-radius 0.2s;
+  display: inline-block;
+}
+
+.dot.active {
+  width: 18px;
+  border-radius: 3px;
+  background: #111;
+}
+
+/* ── Product info ── */
+.pd-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pd-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #e6f4ea;
+  color: #1e7e34;
+  width: fit-content;
+}
+
+.pd-name {
+  font-size: 22px;
+  font-weight: 500;
+  color: #111;
+  line-height: 1.3;
+}
+
+.pd-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.pd-price {
+  font-size: 26px;
+  font-weight: 500;
+  color: #111;
+}
+
+.pd-divider {
+  border: none;
+  border-top: 0.5px solid #e5e5e5;
+}
+
+.pd-desc {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.7;
+}
+
+/* ── Quantity ── */
+.pd-qty-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pd-qty-label {
+  font-size: 13px;
+  color: #888;
+}
+
+.pd-qty {
+  display: flex;
+  align-items: center;
+  border: 0.5px solid #d0d0d0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.pd-qty button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s;
+}
+
+.pd-qty button:hover {
+  background: #f5f5f5;
+}
+
+.pd-qty span {
+  width: 40px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+  border-left: 0.5px solid #e5e5e5;
+  border-right: 0.5px solid #e5e5e5;
+}
+
+/* ── Action buttons ── */
+.pd-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 13px;
+  border-radius: 12px;
+  border: none;
+  background: #111;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.btn-cart:hover {
+  opacity: 0.85;
+}
+
+.btn-wish {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 0.5px solid #d0d0d0;
+  background: transparent;
+  color: #111;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-wish:hover {
+  background: #f5f5f5;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .pd-wrap {
+    grid-template-columns: 1fr;
+  }
+}

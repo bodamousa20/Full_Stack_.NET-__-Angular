@@ -1,0 +1,140 @@
+
+<form class="register-container" [formGroup]="form">
+
+  <div class="register-card">
+
+    <div class="title-section">
+      <h2>Create Account</h2>
+      <p>Join us and start shopping today</p>
+    </div>
+    <!-- Success Message -->
+@if (message() != '') {
+  <div class="alert-success">
+    {{ message() }}
+  </div>
+}
+
+<!-- Error List -->
+@if (errors().length > 0) {
+  <div class="error">
+    <ul>
+      @for (err of errors(); track err) {
+        <li>{{ err }}</li>
+      }
+    </ul>
+  </div>
+}
+    <div class="input-group">
+      <label>Username</label>
+      <input
+        type="text"
+        placeholder="Enter username"
+        formControlName="username"
+      >
+    </div>
+
+    <div class="input-group">
+      <label>Email</label>
+      <input
+        type="email"
+        placeholder="Enter your email"
+        formControlName="email"
+      >
+    </div>
+
+    <div class="input-group">
+      <label>Phone Number</label>
+      <input
+        type="tel"
+        placeholder="Enter phone number"
+        formControlName="phone"
+      >
+    </div>
+        <div class="input-group">
+      <label>age</label>
+      <input
+        type="number"
+        placeholder="Enter your age"
+        formControlName="age"
+      >
+    </div>
+    <div class="row">
+      <div class="input-group">
+        <label>Password</label>
+        <input
+          type="password"
+          placeholder="Create password"
+          formControlName="password"
+        >
+      </div>
+
+      <div class="input-group">
+        <label>Confirm Password</label>
+        <input
+          type="password"
+          placeholder="Confirm password"
+          formControlName="confirm"
+        >
+      </div>
+    </div>
+   @if(message() != ''){
+    <div [class]="'alert alert-'">
+    {{ message() }}
+  </div>
+}
+
+
+     @if (checkusername) {
+      <span class="error">
+        The Username is required Max 30 digit
+      </span>
+    }
+     @if (checkAge) {
+      <span class="error">
+        The Age is Required 
+      </span>
+    }
+     @if (checkPhone) {
+      <span class="error">
+        The Phone is required , 11 digit Only start with 010 or 011 or 012 or 015 Only
+      </span>
+    }
+     @if (CheckEmail) {
+      <span class="error">
+        The Email is Invalid
+      </span>
+    }
+    @if (CheckPassword) {
+      <span class="error">
+        The password is Invalid 6 digit is required
+      </span>
+    }
+        @if (checkMatched) {
+      <span class="error">
+        The password and Confirm Password in Not Matched
+      </span>
+    }
+
+    <div class="checkbox-group">
+      <input type="checkbox" id="terms">
+      <label for="terms">
+        I agree to Terms & Conditions
+      </label>
+    </div>
+
+    <button type="submit" (click)="RegisterSubmited()" [disabled]="isLoading()"  >
+      @if (isLoading()) {
+      <span>Loading...</span>
+   } @else {
+      <span>Create Account</span>
+   }
+    </button>
+
+    <div class="login-link">
+      Already have an account?
+      <a href="/login">Login</a>
+    </div>
+
+  </div>
+
+</form>

@@ -1,0 +1,37 @@
+
+
+<section class="favourites-section">
+  <div class="favourites-header">
+    <h2 class="favourites-title">My Favourites</h2>
+    <span class="favourites-count">{{ favouriteProducts().length }} items</span>
+  </div>
+
+  @if (favouriteProducts().length === 0) {
+    <div class="empty-favourites">
+      <i class="fas fa-heart-broken"></i>
+      <p>No favourites yet</p>
+      <a routerLink="/user/products" class="btn-browse">Browse Products</a>
+    </div>
+  }
+
+  <div class="product-grid">
+    @for (product of favouriteProducts(); track product.id) {
+      <div class="product-card">
+        <div class="card-image-wrap">
+          <img [src]="product.thunmailImage" alt="{{ product.name }}" />
+          <button class="btn-remove-fav" (click)="removeFavourite(product.id)" aria-label="Remove from favourites">
+            <i class="fas fa-heart"></i>
+          </button>
+        </div>
+        <div class="card-details">
+          <h3 class="card-title">{{ product.name }}</h3>
+          <p class="card-desc">{{ product.description }}</p>
+          <div class="card-bottom">
+            <span class="card-price">{{ product.price }}</span>
+<button [routerLink]="['/user/product-details', product.id]" class="btn-view"> View Details </button>
+        </div>
+        </div>
+      </div>
+    }
+  </div>
+</section>

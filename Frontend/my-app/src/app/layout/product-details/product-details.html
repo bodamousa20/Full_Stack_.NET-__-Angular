@@ -1,0 +1,58 @@
+@if(product()){
+<div class="pd-wrap">
+
+  <!-- Gallery -->
+  <div class="pd-gallery">
+    <div class="pd-main-img">
+      <img [src]="activePhotoSet()" [alt]="product()?.name" />
+    </div>
+
+    <div class="pd-carousel">
+      <button class="carousel-btn prev" (click)="scrollPhoto(-1)" [disabled]="activeIdx === 0">&#8249;</button>
+
+      <div class="pd-thumbs-track" #thumbsTrack>
+        @for(image of product()?.photos; track image.id; let i = $index){
+          <div class="pd-thumb" [class.active]="activeIdx === i" (click)="setPhoto(i)">
+            <img [src]=activePhotoSet(image) alt="View {{i+1}}" />
+          </div>
+        }
+      </div>
+
+      <button class="carousel-btn next" (click)="scrollPhoto(1)"
+              [disabled]="activeIdx === (product()?.photos?.length ?? 1) - 1">&#8250;</button>
+    </div>
+
+    <div class="dot-indicators">
+      @for(image of product()?.photos; track image.id; let i = $index){
+        <span class="dot" [class.active]="activeIdx === i" (click)="setPhoto(i)"></span>
+      }
+    </div>
+  </div>
+
+  <!-- Info (same as before) -->
+  <div class="pd-info">
+    <span class="pd-badge">In stock</span>
+    <div>
+      <h1 class="pd-name">{{ product()?.name }}</h1>
+    </div>
+    <div class="pd-price-row">
+      <span class="pd-price">${{ product()?.price }}</span>
+    </div>
+    <hr class="pd-divider" />
+    <p class="pd-desc">{{ product()?.description }}</p>
+    <div class="pd-qty-row">
+      <span class="pd-qty-label">Qty</span>
+      <div class="pd-qty">
+        <button (click)="changeQty(-1)">−</button>
+        <span>{{ qty }}</span>
+        <button (click)="changeQty(1)">+</button>
+      </div>
+    </div>
+    <div class="pd-actions">
+      <button class="btn-cart" (click)="addToCart(product()!.id,qty)">Add to Cart</button>
+      <button class="btn-wish" (click)="addToFavourite(product()!.id)">Save to Wishlist</button>
+    </div>
+  </div>
+
+</div>
+}
